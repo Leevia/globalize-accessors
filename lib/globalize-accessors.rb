@@ -22,6 +22,8 @@ module Globalize::Accessors
   private
 
   def define_accessors(attr_name, locale)
+    # Monkey Patch to address deprecations raised since Rails v5
+    attribute("#{attr_name}_#{locale}", ::ActiveRecord::Type::Value.new)
     define_getter(attr_name, locale)
     define_setter(attr_name, locale)
   end
